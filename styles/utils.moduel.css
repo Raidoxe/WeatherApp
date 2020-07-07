@@ -1,5 +1,5 @@
-.container{
-    margin:40px 5%;
+.text-container{
+    margin:0 5%;
     max-width:600px;
 }
 
@@ -48,13 +48,8 @@
   display: none;
 }
 
-
-
-.main>p{
+.text-container>p{
     font-size:.7em;
-}
-
-.main>:nth-child(3){
     padding-top:10px;
 }
 
@@ -73,7 +68,6 @@
     padding:5px 0px;
 }
 
-
 .high-low-temp{
     display:flex;
     align-items: center;
@@ -87,6 +81,7 @@
 }
 
 .contact{
+    height:100%;    
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -97,4 +92,17 @@
     font-weight:bold;
     text-decoration: underline;
     color:white;
+}
+
+.daily-report{
+    height:75px;
+    width:100%;
+    background-color:#381677;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.time>p{
+    font-size: .6em;
 }
