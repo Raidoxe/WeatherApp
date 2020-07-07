@@ -1,8 +1,9 @@
 import Head from 'next/head'
+import { getSortedPostsData } from './api/getweatherJson'
 
 
 
-export default function Home() {
+export default function Home({allPostsData}) {
   return (
 <div className="container">
 
@@ -12,9 +13,9 @@ export default function Home() {
     </Head>
 
   <div className="hero">
-        <h3 className="city">London</h3>
+        <h3 className="city">Perth</h3>
         <a href=""><p className="change">Change</p></a>
-        <h2 className="current-temp">13°</h2>
+        <h2 className="current-temp">{allPostsData.current.temp}°</h2>
   </div>
 
     <div className="divider">
@@ -35,8 +36,8 @@ export default function Home() {
                 <h4 className="day-one">Wednesday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[0].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[0].temp.min}°</p>
                 </div>
             </div>
             <p>Upcoming:</p>
@@ -44,48 +45,48 @@ export default function Home() {
                 <h4 className="day-one">Thursday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[1].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[1].temp.min}°</p>
                 </div>
             </div>
             <div className="week-day">
                 <h4 className="day-one">Friday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[2].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[2].temp.min}°</p>
                 </div>
             </div>
             <div className="week-day">
                 <h4 className="day-one">Saturday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[3].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[3].temp.min}°</p>
                 </div>
             </div>
             <div className="week-day">
                 <h4 className="day-one">Sunday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[4].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[4].temp.min}°</p>
                 </div>
             </div>
             <div className="week-day">
                 <h4 className="day-one">Monday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[5].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[5].temp.min}°</p>
                 </div>
             </div>
             <div className="week-day">
                 <h4 className="day-one">Tuesday</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">22°</p>
-                    <p className="temp-low">10°</p>
+                    <p className="temp-high">{allPostsData.daily[6].temp.max}°</p>
+                    <p className="temp-low">{allPostsData.daily[6].temp.min}°</p>
                 </div>
             </div>
     </div>
@@ -98,3 +99,11 @@ export default function Home() {
 
   </div>
 )}
+export async function getServerSideProps() {
+  const allPostsData = await getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
