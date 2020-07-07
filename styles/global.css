@@ -1,8 +1,11 @@
 *{
     padding:0;
     margin:0;
-    background-color: #200552;
+    
     /* border: 1px solid red; */
+}
+body{
+    background-color: #200552;
 }
 
 p,h2,h3,h4,a,td,th{
