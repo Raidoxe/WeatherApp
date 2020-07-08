@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { getSortedPostsData } from './api/getweatherJson'
+import LoadDay from '../components/LoadDay'
 
 
 
@@ -156,6 +157,7 @@ export default function Home({allPostsData}) {
                     <p className="temp-low">{allPostsData.daily[6].temp.min}°</p>
                 </div>
             </div>
+            <LoadDay max={allPostsData.daily[6].temp.max} min={allPostsData.daily[6].temp.min} />
     </div>
     </div>
     <div className="contact">
