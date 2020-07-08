@@ -5,19 +5,19 @@ import { getSortedPostsData } from './api/getweatherJson'
 
 export default function Home({allPostsData}) {
   return (
+
 <div className="container">
 
     <Head>
     <title>Create Next App</title>
     <link rel="icon" href="/favicon.ico" />
     </Head>
-
+<div className="hero-img"></div>
   <div className="hero">
         <h3 className="city">Perth</h3>
         <a href=""><p className="change">Change</p></a>
         <h2 className="current-temp">{allPostsData.current.temp}°</h2>
   </div>
-
     <div className="divider">
         <div className="selector">
             <input type="radio" id="london" className="active" name="gender" value="other"></input>
