@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { getSortedPostsData } from './api/getweatherJson'
 import moment from 'moment'
+import LoadDay from '../components/LoadDay'
 
 
 
@@ -17,7 +18,7 @@ export default function Home(props) {
   <div className="hero">
         <h3 className="city">Perth</h3>
         <a href=""><p className="change">Change</p></a>
-        <h2 className="current-temp">{0}°</h2>
+        <h2 className="current-temp">{props.current[1]}°</h2>
   </div>
     <div className="divider">
         <div className="selector">
@@ -34,14 +35,7 @@ export default function Home(props) {
         <div className="main">
         <div className="text-container">
             <p>Today:</p>
-            <div className="week-day">
-                <h4 className="day-one">Wednesday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.wednesday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
+            <LoadDay day={props.day1[0]} max={props.day1[1].max} min={props.day1[1].min}  />
         </div>
             <div className="daily-report">
             <div className="00 time">
@@ -109,54 +103,12 @@ export default function Home(props) {
 
         <div className="text-container">
             <p>Upcoming:</p>
-            <div className="week-day">
-                <h4 className="day-one">Thursday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.thursday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Friday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.friday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Saturday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.saturday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Sunday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.sunday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Monday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.monday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Tuesday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.tuesday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
+            <LoadDay day={props.day2[0]} max={props.day2[1].max} min={props.day2[1].min}  />
+            <LoadDay day={props.day3[0]} max={props.day3[1].max} min={props.day3[1].min}  />
+            <LoadDay day={props.day4[0]} max={props.day4[1].max} min={props.day4[1].min}  />
+            <LoadDay day={props.day5[0]} max={props.day5[1].max} min={props.day5[1].min}  />
+            <LoadDay day={props.day6[0]} max={props.day6[1].max} min={props.day6[1].min}  />
+            <LoadDay day={props.day7[0]} max={props.day7[1].max} min={props.day7[1].min}  />
     </div>
     </div>
     <div className="contact">
@@ -178,19 +130,19 @@ export async function getServerSideProps() {
   const lon = '115.857048'
   const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
   const data = await res.json();
-  //console.log(data)
   //let weatherObj = await JSON.parse(jsonWeatherData);
   let weatherData = await getWeatherPerDay(data);
-  weatherData = ridDecimal(weatherData);
+  //weatherData = ridDecimal(weatherData);
   return {
     props: {
-      monday: weatherData.get('Monday'),
-      tuesday: weatherData.get('Tuesday'),
-      wednesday: weatherData.get('Tuesday'),
-      thursday: weatherData.get('Thursday'),
-      friday: weatherData.get('Friday'),
-      saturday: weatherData.get('Saturday'),
-      sunday: weatherData.get('Sunday')
+      current: weatherData[0],
+      day1: weatherData[1],
+      day2: weatherData[2],
+      day3: weatherData[3],
+      day4: weatherData[4],
+      day5: weatherData[5],
+      day6: weatherData[6],
+      day7: weatherData[7]
     }
   }
 
@@ -201,10 +153,11 @@ async function getWeatherPerDay(weatherObj) {
 
   const temperatureForEachDay = [...weatherObj.daily.map(value => value.temp)];
 
+
   const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt)];
 
-  console.log(temperatureForEachDay);
-  let dayAverages = new Map();
+  let dayAverages = [];
+  dayAverages.push(['current',  Math.floor(weatherObj.current.temp)])
   for (let i = 0; i < 7; i++) {
     //Convert unix UTC Timestamp into weekday
     const date = new Date();
@@ -213,23 +166,18 @@ async function getWeatherPerDay(weatherObj) {
     const weekday = moment(date).format('dddd');
 
     //Get the day temperature of that specific day
-    const dayTemp = temperatureForEachDay[i].day;
-
+    for (let m in temperatureForEachDay[i]){
+        temperatureForEachDay[i][m] = Math.floor(temperatureForEachDay[i][m]);
+    }
+    
+    dayAverages.push([weekday,  temperatureForEachDay[i]]);
     //Return a Map of temperatures in the format ({Weekday}, {Day Temperature})
-    dayAverages.set(weekday, dayTemp);
+    //dayAverages.set(weekday, temperatureForEachDay[i]);
   }
-  console.log(dayAverages);
   return dayAverages;
   
 }
 
-let ridDecimal = (weatherMap) => {
-  let newMap = new Map();
-  weatherMap.forEach((value, key) => {
-    newMap.set(key, Math.floor(value));
-  });
-  return newMap;
-}
 
 
 
