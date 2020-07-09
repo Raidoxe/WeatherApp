@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import { getSortedPostsData } from './api/getweatherJson'
 import moment from 'moment'
-
+import Weekday from './Weekday/Weekday'
+import { doesNotMatch } from 'assert';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function Home(props) {
@@ -34,14 +36,6 @@ export default function Home(props) {
         <div className="main">
         <div className="text-container">
             <p>Today:</p>
-            <div className="week-day">
-                <h4 className="day-one">Wednesday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.wednesday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
         </div>
             <div className="daily-report">
             <div className="00 time">
@@ -108,56 +102,10 @@ export default function Home(props) {
 
 
         <div className="text-container">
-            <p>Upcoming:</p>
-            <div className="week-day">
-                <h4 className="day-one">Thursday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.thursday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Friday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.friday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Saturday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.saturday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Sunday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.sunday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Monday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.monday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-            <div className="week-day">
-                <h4 className="day-one">Tuesday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="temp-high">{props.tuesday}°</p>
-                    <p className="temp-low">{0}°</p>
-                </div>
-            </div>
-    </div>
+            {props.weekdayInfo.map((value) =>
+              <Weekday dayName={value.day} temperature={value.temp} key={value.id}/>
+            )}
+        </div>
     </div>
     <div className="contact">
         <p>Dont like the weather?</p>
@@ -181,16 +129,11 @@ export async function getServerSideProps() {
   //console.log(data)
   //let weatherObj = await JSON.parse(jsonWeatherData);
   let weatherData = await getWeatherPerDay(data);
-  weatherData = ridDecimal(weatherData);
+  const formattedWeatherDataArray =  ridDecimal(weatherData);
+  const formattedWeatherDataArrayWithIds =  populateArrayWithUniqueIds(formattedWeatherDataArray);
   return {
     props: {
-      monday: weatherData.get('Monday'),
-      tuesday: weatherData.get('Tuesday'),
-      wednesday: weatherData.get('Tuesday'),
-      thursday: weatherData.get('Thursday'),
-      friday: weatherData.get('Friday'),
-      saturday: weatherData.get('Saturday'),
-      sunday: weatherData.get('Sunday')
+      weekdayInfo: formattedWeatherDataArrayWithIds    
     }
   }
 
@@ -204,7 +147,7 @@ async function getWeatherPerDay(weatherObj) {
   const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt)];
 
   console.log(temperatureForEachDay);
-  let dayAverages = new Map();
+  let dayAverages = [];
   for (let i = 0; i < 7; i++) {
     //Convert unix UTC Timestamp into weekday
     const date = new Date();
@@ -215,20 +158,33 @@ async function getWeatherPerDay(weatherObj) {
     //Get the day temperature of that specific day
     const dayTemp = temperatureForEachDay[i].day;
 
-    //Return a Map of temperatures in the format ({Weekday}, {Day Temperature})
-    dayAverages.set(weekday, dayTemp);
+    //Return an array of temperatures in the format ({Weekday}, {Day Temperature})
+    dayAverages.push({
+      day: weekday,
+      temp: dayTemp
+    });
   }
   console.log(dayAverages);
   return dayAverages;
   
 }
 
-let ridDecimal = (weatherMap) => {
-  let newMap = new Map();
-  weatherMap.forEach((value, key) => {
-    newMap.set(key, Math.floor(value));
+const ridDecimal = (weatherArray) => {
+  let newArray = weatherArray.map((obj) => {
+    const newTemp = Math.floor(obj.temp);
+    obj.temp = newTemp;
+    return obj;
   });
-  return newMap;
+  return newArray;
+}
+
+const populateArrayWithUniqueIds = (weatherArray) => {
+  let newArray = weatherArray.map((obj) => {
+    obj.id = uuidv4();
+    return obj;
+  });
+  console.log(newArray);
+  return newArray;
 }
 
 
