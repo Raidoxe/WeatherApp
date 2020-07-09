@@ -1,7 +1,7 @@
-.text-container{
-    margin:0 5%;
-    max-width:600px;
-}
+
+/***********      ************/
+/*********** Hero ************/
+/***********      ************/
 
 .hero>h2{
     font-size:6em;
@@ -38,6 +38,10 @@
 
 }
 
+/***********               ************/
+/*********** City Selector ************/
+/***********               ************/
+
 .divider{
     height:12px;
     background-image: linear-gradient(to right, #F5BA7A, #ED5DAE);
@@ -61,10 +65,11 @@
     font-size: 2em;
 }
 
-.text-container>p{
-    font-size:.7em;
-    padding-top:10px;
-}
+
+/***********               ************/
+/***********   Main page   ************/
+/***********               ************/
+
 
 .week-day>h4{
     font-size:1.7em;
@@ -123,7 +128,9 @@
 
 
 
-
+/***********                  ************/
+/***********   Contact Page   ************/
+/***********                  ************/
 
 
 .weatherman>img{

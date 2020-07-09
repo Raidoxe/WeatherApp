@@ -36,6 +36,9 @@ export default function Home(props) {
         <div className="main">
         <div className="text-container">
             <p>Today:</p>
+
+
+          <Weekday isDayOne='true' dayName={props.weekdayInfo[0].day} dayName={props.weekdayInfo[0].temp} key={uuidv4()} />
         </div>
             <div className="daily-report">
             <div className="00 time">
@@ -103,7 +106,7 @@ export default function Home(props) {
 
         <div className="text-container">
             {props.weekdayInfo.map((value) =>
-              <Weekday dayName={value.day} temperature={value.temp} key={value.id} isDayOne={value.isDayOne}/>
+              <Weekday dayName={value.day} temperature={value.temp} key={value.id} isDayOne='false'/>
             )}
         </div>
     </div>

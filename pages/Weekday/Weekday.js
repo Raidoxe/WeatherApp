@@ -9,7 +9,7 @@ const Weekday = (props) => {
                 {props.temperature}
             </div>
         </div>*/
-            <div className={props.isDayOne ? "day-one" : "other-weekdays"}>
+            <div className={props.isDayOne == 'true' ? "day-one" : "other-weekdays"}>
             <h4 className="other-days">{props.dayName}</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
