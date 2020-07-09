@@ -103,7 +103,7 @@ export default function Home(props) {
 
         <div className="text-container">
             {props.weekdayInfo.map((value) =>
-              <Weekday dayName={value.day} temperature={value.temp} key={value.id}/>
+              <Weekday dayName={value.day} temperature={value.temp} key={value.id} isDayOne={value.isDayOne}/>
             )}
         </div>
     </div>
@@ -123,7 +123,7 @@ export default function Home(props) {
 //Gets all prop data for weekdays before render
 export async function getServerSideProps() {
   const lat = '-31.953512';
-  const lon = '115.857048'
+  const lon = '115.857048';
   const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
   const data = await res.json();
   //console.log(data)
@@ -131,6 +131,7 @@ export async function getServerSideProps() {
   let weatherData = await getWeatherPerDay(data);
   const formattedWeatherDataArray =  ridDecimal(weatherData);
   const formattedWeatherDataArrayWithIds =  populateArrayWithUniqueIds(formattedWeatherDataArray);
+  const fwdawti = defineDayOne(formattedWeatherDataArrayWithIds);
   return {
     props: {
       weekdayInfo: formattedWeatherDataArrayWithIds    
@@ -185,6 +186,13 @@ const populateArrayWithUniqueIds = (weatherArray) => {
   });
   console.log(newArray);
   return newArray;
+}
+
+const defineDayOne = (weatherArray) => {
+  weatherArray[0].isDayOne = true;
+  for (let i = 1; i < weatherArray.length; i++) {
+    weatherArray[i].isDayOne = false;
+  }
 }
 
 
