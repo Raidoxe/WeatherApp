@@ -18,11 +18,24 @@
 }
 
 .hero{
-    margin: 40px auto;
+    height:250px;
     display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.hero-img{
+    height:250px;
+    width:100%;
+    background-image: url(../public/images/london-lg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    opacity: .7;
+
 }
 
 .divider{
@@ -45,7 +58,7 @@
 }
 
 .selector input[type="radio"]{
-  display: none;
+    font-size: 2em;
 }
 
 .text-container>p{
@@ -72,7 +85,7 @@
     display:flex;
     align-items: center;
     justify-content: space-between;
-    width:30%;
+    width:50%;
 }
 
 .high-low-temp>p{
@@ -85,7 +98,8 @@
     display:flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-top: 30px;
 }
 
 .contact>span{
@@ -105,4 +119,80 @@
 
 .time>p{
     font-size: .6em;
+}
+
+
+
+
+
+
+.weatherman>img{
+    width:100px;
+    height:100px;
+    background-color:red;
+    border-radius:50%;
+}
+
+
+
+.previous-page{
+    padding-top:25px;
+    text-align: center;
+    font-size:.7em;
+}
+
+.weatherman{
+    display: flex;
+    justify-content: space-between;
+    margin-top:20px;
+}
+
+.weatherman-bio{
+    width:60%;
+    display:flex;
+    flex-direction: column;
+}
+
+
+.weatherman-bio>h3{
+    padding-bottom:6px;
+    font-weight:400;
+}
+
+span{
+    font-weight:700;
+}
+.weatherman-bio>p{
+    font-size:.65em;
+}
+
+.complaints{
+    font-size:2em;
+    padding:20px 0px;
+    font-weight: 500;
+}
+form>input{
+    width:100%;
+    border-radius: 8px;
+    border:none;
+    background-color: #381677;
+    height:35px;
+}
+
+.complaint-text{
+    height:81px;
+}
+
+.submit-btn{
+    width: 150px;
+    height:35px;
+    position: relative;
+    float:right;
+    background-color:#ED61AB;
+    color:white;
+    font-family:'Raleway', sans-serif;
+    font-size:1.5em;
+    font-weight:700;
+    margin-top:10px;
+
 }
