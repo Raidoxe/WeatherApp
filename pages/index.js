@@ -25,7 +25,7 @@ export default function Home(props) {
         <div className="selector">
             <input type="radio" id="london" className="active" name="gender" value="other"></input>
             <input type="radio" id="newyork" name="gender" value="other"></input>
-            <input type="radio" id="perth" name="gender" value="other"></input>
+            <input type="radio" id="perth" name="gender" checked value="other"></input>
             <input type="radio" id="sydney" name="gender" value="other"></input>
             <input type="radio" id="california" name="gender" value="other"></input>
         </div>
