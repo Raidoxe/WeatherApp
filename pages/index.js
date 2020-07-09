@@ -157,9 +157,9 @@ export async function getServerSideProps () {
 async function getWeatherPerDay(weatherObj) {
 
   const temperatureForEachDay = [...weatherObj.daily.map(value => value.temp)];
+  const timeDiff = weatherObj.timezone_offset;
 
-
-  const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt)];
+  const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt + timeDiff)];
 
   let dayAverages = [];
   dayAverages.push(['current',  Math.floor(weatherObj.current.temp)])
