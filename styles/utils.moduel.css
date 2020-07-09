@@ -1,7 +1,6 @@
-.text-container{
-    margin:0 5%;
-    max-width:600px;
-}
+/***********      ************/
+/*********** Hero ************/
+/***********      ************/
 
 .hero>h2{
     font-size:6em;
@@ -38,6 +37,10 @@
 
 }
 
+/***********               ************/
+/*********** City Selector ************/
+/***********               ************/
+
 .divider{
     height:12px;
     background-image: linear-gradient(to right, #F5BA7A, #ED5DAE);
@@ -61,24 +64,25 @@
     font-size: 2em;
 }
 
-.text-container>p{
-    font-size:.7em;
-    padding-top:10px;
-}
 
-.week-day>h4{
+/***********               ************/
+/***********   Main page   ************/
+/***********               ************/
+
+
+.other-weekdays>h4{
     font-size:1.7em;
 }
 
-.temp-high{
-    font-weight:bold;
-}
-
-.week-day{
+.other-weekdays{
     display:flex;
     justify-content: space-between;
     width:100%;
     padding:5px 0px;
+}
+
+.temp-high{
+    font-weight:bold;
 }
 
 .high-low-temp{
@@ -123,7 +127,9 @@
 
 
 
-
+/***********                  ************/
+/***********   Contact Page   ************/
+/***********                  ************/
 
 
 .weatherman>img{
@@ -196,3 +202,36 @@ form>input{
     margin-top:10px;
 
 }
+
+.thanks {
+    padding:30px;
+    font-size: .65em;    
+}
+
+.home-link {
+    display: flex;
+    justify-content: center;
+}
+
+.home-btn {
+    background-color: #ED61AB;
+    padding: 10.5px 21px;
+    border-radius: 8px;
+    color: white;
+    font-family:'Raleway', sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.home-btn:hover {
+    border-top-color: #28597a;
+    background: #28597a;
+    color: #ccc;
+    }
+ .home-btn:active {
+    border-top-color: #1b435e;
+    background: #1b435e;
+    }
+
+

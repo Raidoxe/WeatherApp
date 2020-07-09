@@ -1,7 +1,6 @@
-
-
 export default function FirstPost() {
   return (
+    
   <div>
     <div className="hero-img"></div>
             <div className="hero">
@@ -44,13 +43,3 @@ export default function FirstPost() {
     )
 
 }
-
-export async function getServerSideProps() {
-    const allPostsData = await getSortedPostsData()
-    return {
-      props: {
-        allPostsData
-      }
-    }
-  }
-  
