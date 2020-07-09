@@ -22,7 +22,7 @@ export default function Home(props) {
     <title>Create Next App</title>
     <link rel="icon" href="/favicon.ico" />
     </Head>
-<div className="hero-img"></div>
+<div className="hero-img" id={weather.location[1]}></div>
   <div className="hero">
         <h3 className="city">{weather.location[1]}</h3>
         <a href=""><p className="change">Change</p></a>

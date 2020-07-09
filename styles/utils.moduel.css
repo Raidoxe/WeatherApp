@@ -27,15 +27,30 @@
 .hero-img{
     height:250px;
     width:100%;
-    background-image: url(../public/images/london-lg.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
     z-index: -1;
     opacity: .7;
-
 }
+
+#London{
+    background-image: url(../public/images/london-lg.jpg);
+}
+#Sydney{
+    background-image: url(../public/images/sydney.jpg);
+}
+#Perth{
+    background-image: url(../public/images/perth.jpg);
+}
+#Los_Angeles{
+    background-image: url(../public/images/california.jpg);
+}
+#New_York{
+    background-image: url(../public/images/newyork.jpg);
+}
+
 
 /***********               ************/
 /*********** City Selector ************/
