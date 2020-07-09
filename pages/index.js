@@ -36,14 +36,6 @@ export default function Home(props) {
         <div className="main">
         <div className="text-container">
             <p>Today:</p>
-            <div className="week-day">
-                <h4 className="day-one">Wednesday</h4>
-                <div className="high-low-temp">
-                    <p className="temp-icon-lg">Icon</p>
-                    <p className="average-temp">{props.wednesday}°</p>
-                    
-                </div>
-            </div>
         </div>
             <div className="daily-report">
             <div className="00 time">
