@@ -70,11 +70,11 @@
 /***********               ************/
 
 
-.other-weekdays>h4{
+.week-day>h4{
     font-size:1.7em;
 }
 
-.other-weekdays{
+.week-day{
     display:flex;
     justify-content: space-between;
     width:100%;

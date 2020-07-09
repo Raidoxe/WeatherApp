@@ -30,11 +30,11 @@ export default function Home(props) {
   </div>
     <div className="divider">
         <div className="selector">
-            <input type="radio" id="london" onClick={ async ()  =>  ( await changeLocation('51.509865','-0.118092', setWeather))} className="active" name="gender" value="other"></input>
-            <input type="radio" id="newyork" onClick={ async ()  =>  ( await changeLocation('40.730610','-73.935242', setWeather))} name="gender" value="other"></input>
-            <input type="radio" id="perth" onClick={ async ()  =>  ( await changeLocation('-31.953512','115.857048', setWeather))} name="gender" value="other"></input>
-            <input type="radio" id="sydney" onClick={ async ()  =>  ( await changeLocation('-33.865143','151.209900', setWeather))} name="gender" value="other"></input>
-            <input type="radio" id="california" onClick={ async ()  =>  ( await changeLocation('36.778259','-119.417931', setWeather))} name="gender" value="other"></input>
+            <input type="radio" id="london" onClick={ async ()  =>  ( await changeLocation('51.509865','-0.118092', setWeather))} className="active" name="city"></input>
+            <input type="radio" id="newyork" onClick={ async ()  =>  ( await changeLocation('40.730610','-73.935242', setWeather))} name="city"></input>
+            <input type="radio" id="perth" onClick={ async ()  =>  ( await changeLocation('-31.953512','115.857048', setWeather))} name="city"  ></input>
+            <input type="radio" id="sydney" onClick={ async ()  =>  ( await changeLocation('-33.865143','151.209900', setWeather))} name="city"></input>
+            <input type="radio" id="california" onClick={ async ()  =>  ( await changeLocation('36.778259','-119.417931', setWeather))} name="city"></input>
         </div>
     </div>
 
