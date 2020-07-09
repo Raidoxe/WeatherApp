@@ -203,3 +203,36 @@ form>input{
     margin-top:10px;
 
 }
+
+.thanks {
+    padding:30px;
+    font-size: .65em;    
+}
+
+.home-link {
+    display: flex;
+    justify-content: center;
+}
+
+.home-btn {
+    background-color: #ED61AB;
+    padding: 10.5px 21px;
+    border-radius: 8px;
+    color: white;
+    font-family:'Raleway', sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.home-btn:hover {
+    border-top-color: #28597a;
+    background: #28597a;
+    color: #ccc;
+    }
+ .home-btn:active {
+    border-top-color: #1b435e;
+    background: #1b435e;
+    }
+
+
