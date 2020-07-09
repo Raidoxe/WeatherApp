@@ -9,13 +9,13 @@ const Weekday = (props) => {
                 {props.temperature}
             </div>
         </div>*/
-        <div className="week-day">
-                <h4 className="day-one">{props.dayName}</h4>
+            <div className={props.isDayOne ? "day-one" : "other-weekdays"}>
+            <h4 className="other-days">{props.dayName}</h4>
                 <div className="high-low-temp">
                     <p className="temp-icon-lg">Icon</p>
                     <p className="average-temp">{props.temperature}</p>
                 </div>
-        </div>
+            </div>
     );
 }
 
