@@ -1,12 +1,20 @@
 import Head from 'next/head'
-import { getSortedPostsData } from './api/getweatherJson'
 import moment from 'moment'
 import LoadDay from '../components/LoadDay'
+import React, { useState } from 'react';
 
 
 
 export default function Home(props) {
+
+ // usestate lat/lon
+
+ // use effect on latlon triggers fetch weather... 
+
+  const [weather, setWeather] = useState(props.weather);
+    
   return (
+    
 
 <div className="container">
 
@@ -16,17 +24,17 @@ export default function Home(props) {
     </Head>
 <div className="hero-img"></div>
   <div className="hero">
-        <h3 className="city">Perth</h3>
+        <h3 className="city">{weather.location[1]}</h3>
         <a href=""><p className="change">Change</p></a>
-        <h2 className="current-temp">{props.current[1]}°</h2>
+        <h2 className="current-temp">{weather.current[1]}°</h2>
   </div>
     <div className="divider">
         <div className="selector">
-            <input type="radio" id="london" className="active" name="gender" value="other"></input>
-            <input type="radio" id="newyork" name="gender" value="other"></input>
-            <input type="radio" id="perth" name="gender" value="other"></input>
-            <input type="radio" id="sydney" name="gender" value="other"></input>
-            <input type="radio" id="california" name="gender" value="other"></input>
+            <input type="radio" id="london" onClick={ async ()  =>  ( await changeLocation('51.509865','-0.118092', setWeather))} className="active" name="gender" value="other"></input>
+            <input type="radio" id="newyork" onClick={ async ()  =>  ( await changeLocation('40.730610','-73.935242', setWeather))} name="gender" value="other"></input>
+            <input type="radio" id="perth" onClick={ async ()  =>  ( await changeLocation('-31.953512','115.857048', setWeather))} name="gender" value="other"></input>
+            <input type="radio" id="sydney" onClick={ async ()  =>  ( await changeLocation('-33.865143','151.209900', setWeather))} name="gender" value="other"></input>
+            <input type="radio" id="california" onClick={ async ()  =>  ( await changeLocation('36.778259','-119.417931', setWeather))} name="gender" value="other"></input>
         </div>
     </div>
 
@@ -35,7 +43,7 @@ export default function Home(props) {
         <div className="main">
         <div className="text-container">
             <p>Today:</p>
-            <LoadDay day={props.day1[0]} max={props.day1[1].max} min={props.day1[1].min}  />
+            <LoadDay day={weather.day1[0]} max={weather.day1[1].max} min={weather.day1[1].min}  />
         </div>
             <div className="daily-report">
             <div className="00 time">
@@ -103,12 +111,12 @@ export default function Home(props) {
 
         <div className="text-container">
             <p>Upcoming:</p>
-            <LoadDay day={props.day2[0]} max={props.day2[1].max} min={props.day2[1].min}  />
-            <LoadDay day={props.day3[0]} max={props.day3[1].max} min={props.day3[1].min}  />
-            <LoadDay day={props.day4[0]} max={props.day4[1].max} min={props.day4[1].min}  />
-            <LoadDay day={props.day5[0]} max={props.day5[1].max} min={props.day5[1].min}  />
-            <LoadDay day={props.day6[0]} max={props.day6[1].max} min={props.day6[1].min}  />
-            <LoadDay day={props.day7[0]} max={props.day7[1].max} min={props.day7[1].min}  />
+            <LoadDay day={weather.day2[0]} max={weather.day2[1].max} min={weather.day2[1].min}  />
+            <LoadDay day={weather.day3[0]} max={weather.day3[1].max} min={weather.day3[1].min}  />
+            <LoadDay day={weather.day4[0]} max={weather.day4[1].max} min={weather.day4[1].min}  />
+            <LoadDay day={weather.day5[0]} max={weather.day5[1].max} min={weather.day5[1].min}  />
+            <LoadDay day={weather.day6[0]} max={weather.day6[1].max} min={weather.day6[1].min}  />
+            <LoadDay day={weather.day7[0]} max={weather.day7[1].max} min={weather.day7[1].min}  />
     </div>
     </div>
     <div className="contact">
@@ -125,16 +133,16 @@ export default function Home(props) {
 
 
 //Gets all prop data for weekdays before render
-export async function getServerSideProps() {
+export async function getServerSideProps () {
   const lat = '-31.953512';
-  const lon = '115.857048'
+  const lon = '115.857048';
   const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
   const data = await res.json();
   //let weatherObj = await JSON.parse(jsonWeatherData);
   let weatherData = await getWeatherPerDay(data);
   //weatherData = ridDecimal(weatherData);
   return {
-    props: {
+    props: { weather: { 
       current: weatherData[0],
       day1: weatherData[1],
       day2: weatherData[2],
@@ -142,10 +150,10 @@ export async function getServerSideProps() {
       day4: weatherData[4],
       day5: weatherData[5],
       day6: weatherData[6],
-      day7: weatherData[7]
+      day7: weatherData[7],
+      location: weatherData[8]
     }
-  }
-
+  }}
 }
 
 //Returns a Map of temperatures in the format ({Weekday}, {Day Temperature})
@@ -171,13 +179,36 @@ async function getWeatherPerDay(weatherObj) {
     }
     
     dayAverages.push([weekday,  temperatureForEachDay[i]]);
-    //Return a Map of temperatures in the format ({Weekday}, {Day Temperature})
-    //dayAverages.set(weekday, temperatureForEachDay[i]);
   }
+  const locatoin = weatherObj.timezone.split("/");
+  console.log(locatoin)
+  dayAverages.push(["location", locatoin[1]])
   return dayAverages;
   
 }
 
 
 
+async function changeLocation(lat, lon, set) {
+    console.log("LONDOn");
+    const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
+    const data = await res.json();
+    let weatherData = await getWeatherPerDay(data);
+    return set( {  
+        current: weatherData[0],
+        day1: weatherData[1],
+        day2: weatherData[2],
+        day3: weatherData[3],
+        day4: weatherData[4],
+        day5: weatherData[5],
+        day6: weatherData[6],
+        day7: weatherData[7],
+        location: weatherData[8]
+      })
+    
+    
 
+    
+
+    }
+ 
