@@ -129,9 +129,6 @@ export default function Home(props) {
 )}
 
 
-
-
-
 //Gets all prop data for weekdays before render
 export async function getServerSideProps () {
   const lat = '-31.953512';
@@ -181,7 +178,6 @@ async function getWeatherPerDay(weatherObj) {
     dayAverages.push([weekday,  temperatureForEachDay[i]]);
   }
   const locatoin = weatherObj.timezone.split("/");
-  console.log(locatoin)
   dayAverages.push(["location", locatoin[1]])
   return dayAverages;
   
@@ -190,7 +186,6 @@ async function getWeatherPerDay(weatherObj) {
 
 
 async function changeLocation(lat, lon, set) {
-    console.log("LONDOn");
     const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
     const data = await res.json();
     let weatherData = await getWeatherPerDay(data);
@@ -205,10 +200,5 @@ async function changeLocation(lat, lon, set) {
         day7: weatherData[7],
         location: weatherData[8]
       })
-    
-    
-
-    
-
     }
  
