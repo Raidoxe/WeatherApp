@@ -1,4 +1,3 @@
-import { getSortedPostsData } from './api/getweatherJson'
 import Link from 'next/link'
 
 
