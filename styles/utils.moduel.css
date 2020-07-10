@@ -27,15 +27,30 @@
 .hero-img{
     height:250px;
     width:100%;
-    background-image: url(../public/images/london-lg.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
     z-index: -1;
     opacity: .7;
-
 }
+
+#London{
+    background-image: url(../public/images/london-lg.jpg);
+}
+#Sydney{
+    background-image: url(../public/images/sydney.jpg);
+}
+#Perth{
+    background-image: url(../public/images/perth.jpg);
+}
+#Los_Angeles{
+    background-image: url(../public/images/california.jpg);
+}
+#New_York{
+    background-image: url(../public/images/newyork.jpg);
+}
+
 
 /***********               ************/
 /*********** City Selector ************/
@@ -60,9 +75,25 @@
     align-items: center;
 }
 
-.selector input[type="radio"]{
-    font-size: 2em;
+.selector input{
+    display:none;
 }
+
+.selector label {
+    display: inline-block;
+    border: 1.2px solid #3d1c7a;
+    border-radius: 50%;
+    width:5px;
+    height:5px;
+}
+
+
+.selector input[type="radio"]:checked + label {
+    background-color: #200552;
+    width:10px;
+    height:10px;
+}
+
 
 
 /***********               ************/
@@ -70,12 +101,14 @@
 /***********               ************/
 
 
-.other-weekdays>h4{
+.week-day>h4{
     font-size:1.7em;
 }
 
-.other-weekdays{
+.week-day{
+    height:40px;
     display:flex;
+    align-items: center;
     justify-content: space-between;
     width:100%;
     padding:5px 0px;
@@ -88,7 +121,7 @@
 .high-low-temp{
     display:flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     width:50%;
 }
 
@@ -97,6 +130,15 @@
     padding:3px;
 }
 
+.lg-icon{
+    width:50px;
+    height:50px;
+}
+
+.sm-icon{
+    width:30px;
+    height:30px;
+}
 .contact{
     height:100%;    
     display:flex;
@@ -106,16 +148,20 @@
     padding-top: 30px;
 }
 
-.contact>span{
+.contact>a{
     font-weight:bold;
     text-decoration: underline;
     color:white;
 }
 
+.daily-bg{
+    height:75px;
+    background-color:#381677;
+    padding: 0px 5%;
+}
 .daily-report{
     height:75px;
-    width:100%;
-    background-color:#381677;
+    width:100%; 
     display:flex;
     justify-content: space-evenly;
     align-items: center;
@@ -124,6 +170,15 @@
 .time>p{
     font-size: .6em;
 }
+
+.time{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 
 
@@ -200,6 +255,8 @@ form>input{
     font-size:1.5em;
     font-weight:700;
     margin-top:10px;
+    border: none;
+    border-radius: 4px;
 
 }
 
@@ -211,17 +268,23 @@ form>input{
 .home-link {
     display: flex;
     justify-content: center;
+    
 }
 
 .home-btn {
     background-color: #ED61AB;
-    padding: 10.5px 21px;
-    border-radius: 8px;
+    padding: 5px 18px 18px;
+    border-radius: 4px;
     color: white;
     font-family:'Raleway', sans-serif;
     text-decoration: none;
     vertical-align: middle;
-    font-weight: bold;
+    font-weight: 700;
+    width: 100px;
+    height:15px;
+    text-align: center;
+    font-size:1.5em;
+    
 }
 
 .home-btn:hover {
@@ -233,5 +296,3 @@ form>input{
     border-top-color: #1b435e;
     background: #1b435e;
     }
-
-
