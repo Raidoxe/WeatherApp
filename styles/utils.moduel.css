@@ -106,7 +106,9 @@
 }
 
 .week-day{
+    height:40px;
     display:flex;
+    align-items: center;
     justify-content: space-between;
     width:100%;
     padding:5px 0px;
@@ -119,7 +121,7 @@
 .high-low-temp{
     display:flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     width:50%;
 }
 
@@ -128,6 +130,10 @@
     padding:3px;
 }
 
+.lg-icon{
+    width:50px;
+    height:50px;
+}
 .contact{
     height:100%;    
     display:flex;
