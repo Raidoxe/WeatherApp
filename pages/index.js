@@ -54,7 +54,6 @@ export default function Home(props) {
             
         </div>
 
-      {console.log(weather.hour[0][0])}
       <Hourly hourdata = {weather.hour}/>
 
         <div className="text-container">
