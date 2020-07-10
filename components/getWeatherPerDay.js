@@ -6,7 +6,7 @@ async function getWeatherPerDay(weatherObj) {
     const timeDiff = weatherObj.timezone_offset;
     const weatherIcon = [...weatherObj.daily.map(value => value.weather)];
   
-    const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt + timeDiff)];
+    const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt + timeDiff - 28800)];
   
     let dayAverages = [];
     dayAverages.push(['current',  Math.floor(weatherObj.current.temp)])

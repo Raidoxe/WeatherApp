@@ -5,7 +5,7 @@ async function changeLocation(lat, lon, set) {
     const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
     const data = await res.json();
     let weatherData = await getWeatherPerDay(data);
-    const hourly = await gethourly(data.hourly);
+    const hourly = await gethourly(data.hourly, data.timezone_offset);
     return set( {  
         current: weatherData[0],
         day1: weatherData[1],
