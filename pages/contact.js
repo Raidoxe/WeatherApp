@@ -50,7 +50,7 @@ export default function FirstPost(props) {
     <input type="email" id="fname" name="fname"></input><br></br>
     <label>Complaint</label><br></br>
     <input type="text" className="complaint-text" id="fname" name="fname"></input><br></br><br></br>
-    <button className="submit-btn" onClick={changeThankYouFalse}></button>
+    <button className="submit-btn" onClick={changeThankYouFalse}>Submit</button>
     </form></div> : <div>
         <div className="thanks">
         <h2>Thanks for submitting</h2>
