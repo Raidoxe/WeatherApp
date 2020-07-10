@@ -13,13 +13,13 @@ export default async (req, res) => {
     const complaint = req.body;
     const data = {
         from: '<weatherData@samples.mailgun.org>',
-        to: 'bderham@marketforce.com.au',
+        to: 'olivernhuthpriority@gmail.com',
         subject: `Weather Complaint`,
         text: `From: ${complaint.name}, ${complaint.complaint}, ${complaint.email}`
     };
     mg.messages().send(data, (error, body) => {
         console.log(body);
-        res.status(200);
+        res.status(201);
         res.send('Success');
     });
     
