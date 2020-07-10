@@ -143,7 +143,7 @@
     padding-top: 30px;
 }
 
-.contact>span{
+.contact>a{
     font-weight:bold;
     text-decoration: underline;
     color:white;
@@ -161,6 +161,8 @@
 .time>p{
     font-size: .6em;
 }
+
+
 
 
 
