@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import moment from 'moment'
 import LoadDay from '../components/LoadDay'
+import Hourly from '../components/hourly'
 import React, { useState } from 'react';
 
 
@@ -43,80 +44,20 @@ export default function Home(props) {
         <div className="main">
         <div className="text-container">
             <p>Today:</p>
-            <LoadDay day={weather.day1[0]} max={weather.day1[1].max} min={weather.day1[1].min}  />
+            <LoadDay day={weather.day1[0]} max={weather.day1[1].max} min={weather.day1[1].min} icon={weather.day1[2]} />
+            
         </div>
-            <div className="daily-report">
-            <div className="00 time">
-                <p>00am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="2 time">
-                <p>02am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="4 time">
-                <p>04am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="6 time">
-                <p>06am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="8 time">
-                <p>10am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="10am time">
-                <p>12am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="12 time">
-                <p>02pm</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="02 time">
-                <p>04pm</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="04 time">
-                <p>06pm</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="06 time">
-                <p>08pm</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="08 time">
-                <p>10pm</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            <div className="10pm time">
-                <p>12am</p>
-                <p>icon</p>
-                <p>10°</p>
-            </div>
-            </div>
 
+        <Hourly />
 
         <div className="text-container">
             <p>Upcoming:</p>
-            <LoadDay day={weather.day2[0]} max={weather.day2[1].max} min={weather.day2[1].min}  />
-            <LoadDay day={weather.day3[0]} max={weather.day3[1].max} min={weather.day3[1].min}  />
-            <LoadDay day={weather.day4[0]} max={weather.day4[1].max} min={weather.day4[1].min}  />
-            <LoadDay day={weather.day5[0]} max={weather.day5[1].max} min={weather.day5[1].min}  />
-            <LoadDay day={weather.day6[0]} max={weather.day6[1].max} min={weather.day6[1].min}  />
-            <LoadDay day={weather.day7[0]} max={weather.day7[1].max} min={weather.day7[1].min}  />
+            <LoadDay day={weather.day2[0]} max={weather.day2[1].max} min={weather.day2[1].min} icon={weather.day2[2]}/>
+            <LoadDay day={weather.day3[0]} max={weather.day3[1].max} min={weather.day3[1].min}  icon={weather.day3[2]}/>
+            <LoadDay day={weather.day4[0]} max={weather.day4[1].max} min={weather.day4[1].min}  icon={weather.day4[2]}/>
+            <LoadDay day={weather.day5[0]} max={weather.day5[1].max} min={weather.day5[1].min} icon={weather.day5[2]} />
+            <LoadDay day={weather.day6[0]} max={weather.day6[1].max} min={weather.day6[1].min} icon={weather.day6[2]} />
+            <LoadDay day={weather.day7[0]} max={weather.day7[1].max} min={weather.day7[1].min} icon={weather.day7[2]} />
     </div>
     </div>
     <div className="contact">
@@ -158,6 +99,7 @@ async function getWeatherPerDay(weatherObj) {
 
   const temperatureForEachDay = [...weatherObj.daily.map(value => value.temp)];
   const timeDiff = weatherObj.timezone_offset;
+  const weatherIcon = [...weatherObj.daily.map(value => value.weather)];
 
   const dayUnixUTCTimestamp = [...weatherObj.daily.map(value => value.dt + timeDiff)];
 
@@ -175,7 +117,7 @@ async function getWeatherPerDay(weatherObj) {
         temperatureForEachDay[i][m] = Math.floor(temperatureForEachDay[i][m]);
     }
     
-    dayAverages.push([weekday,  temperatureForEachDay[i]]);
+    dayAverages.push([weekday,  temperatureForEachDay[i], weatherIcon[i][0].icon]);
   }
   const locatoin = weatherObj.timezone.split("/");
   dayAverages.push(["location", locatoin[1]])
