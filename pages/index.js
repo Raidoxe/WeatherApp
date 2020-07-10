@@ -53,7 +53,8 @@ export default function Home(props) {
             
         </div>
 
-        <Hourly />
+      {console.log(weather.hour[0][0])}
+      <Hourly hourdata = {weather.hour}/>
 
         <div className="text-container">
             <p>Upcoming:</p>
@@ -83,6 +84,9 @@ export async function getServerSideProps () {
   const data = await res.json();
   //let weatherObj = await JSON.parse(jsonWeatherData);
   let weatherData = await getWeatherPerDay(data);
+  console.log(data.hourly[3].dt);
+  const hourly = await gethourly(data.hourly);
+  
   //weatherData = ridDecimal(weatherData);
   return {
     props: { weather: { 
@@ -94,7 +98,9 @@ export async function getServerSideProps () {
       day5: weatherData[5],
       day6: weatherData[6],
       day7: weatherData[7],
-      location: weatherData[8]
+      location: weatherData[8],
+      hour: hourly
+    
     }
   }}
 }
@@ -126,16 +132,32 @@ async function getWeatherPerDay(weatherObj) {
   }
   const locatoin = weatherObj.timezone.split("/");
   dayAverages.push(["location", locatoin[1]])
+
   return dayAverages;
   
 }
 
+async function gethourly(hours){
+  let hourave = [];
+  let temp = 0;
+  for( let i = 0; i < 24; i = i+2){
+    const date = new Date();
+    const milliseconds = hours[i].dt * 1000;
+    date.setTime(milliseconds);
+    const time = moment(date).format('hh A');
+
+    temp = Math.floor(hours[i].temp);
+    hourave.push([time, temp, hours[i].weather[0].icon])
+  }
+  return hourave;
+}
 
 
 async function changeLocation(lat, lon, set) {
     const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
     const data = await res.json();
     let weatherData = await getWeatherPerDay(data);
+    const hourly = await gethourly(data.hourly);
     return set( {  
         current: weatherData[0],
         day1: weatherData[1],
@@ -145,7 +167,9 @@ async function changeLocation(lat, lon, set) {
         day5: weatherData[5],
         day6: weatherData[6],
         day7: weatherData[7],
-        location: weatherData[8]
+        location: weatherData[8],
+        hour: hourly
+       
       })
     }
  
