@@ -226,6 +226,7 @@ form>input{
 .home-link {
     display: flex;
     justify-content: center;
+    
 }
 
 .home-btn {
@@ -237,6 +238,9 @@ form>input{
     text-decoration: none;
     vertical-align: middle;
     font-weight: bold;
+    width: 100px;
+    text-align: center;
+    
 }
 
 .home-btn:hover {
