@@ -32,7 +32,8 @@ export default function FirstPost(props) {
             </div>
             </div>
     <div className="text-container">
-    <a><p className="previous-page">I regret this take me back!</p></a>
+      <Link href="/"><a><p className="previous-page">I regret this take me back</p></a></Link>
+    
     <div className="weatherman">
         <img></img>
         <div className="weatherman-bio">
