@@ -84,7 +84,6 @@ export async function getServerSideProps () {
   const data = await res.json();
   //let weatherObj = await JSON.parse(jsonWeatherData);
   let weatherData = await getWeatherPerDay(data);
-  console.log(data.hourly[3].dt);
   const hourly = await gethourly(data.hourly);
   
   //weatherData = ridDecimal(weatherData);
