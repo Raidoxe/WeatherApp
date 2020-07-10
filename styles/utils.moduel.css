@@ -75,9 +75,25 @@
     align-items: center;
 }
 
-.selector input[type="radio"]{
-    font-size: 2em;
+.selector input{
+    display:none;
 }
+
+.selector label {
+    display: inline-block;
+    border: 1.2px solid #3d1c7a;
+    border-radius: 50%;
+    width:5px;
+    height:5px;
+}
+
+
+.selector input[type="radio"]:checked + label {
+    background-color: #200552;
+    width:10px;
+    height:10px;
+}
+
 
 
 /***********               ************/
