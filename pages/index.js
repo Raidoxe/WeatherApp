@@ -199,6 +199,6 @@ async function changeLocation(lat, lon, set) {
         day6: weatherData[6],
         day7: weatherData[7],
         location: weatherData[8]
-      })
+      });
     }
  
