@@ -1,36 +1,23 @@
 import React, {useState} from 'react';
 import Link from 'next/link'
 
+
 export default function FirstPost(props) {
 
   const [thankYou, setIsThankYou] = useState(true);
-
-  
-
-  
-  
 
   const changeThankYouFalse = () => {
     setIsThankYou(false);
   }
 
   return (
-  <div>
-    <div className="hero-img"></div>
-            <div className="hero">
-            <h3 className="city">Perth</h3>
-            <a href=""><p className="change">Change</p></a>
-            </div>
 
-            <div className="divider">
-            <div className="selector">
-                <input type="radio" id="london" className="active" name="gender" value="other"></input>
-                <input type="radio" id="newyork" name="gender" value="other"></input>
-                <input type="radio" id="perth" name="gender" value="other"></input>
-                <input type="radio" id="sydney" name="gender" value="other"></input>
-                <input type="radio" id="california" name="gender" value="other"></input>
-            </div>
-            </div>
+
+  <div>
+
+
+  <Layout  location={weather.location[1]} current={weather.current[1]} setWeather={setWeather}/>
+
     <div className="text-container">
       <Link href="/"><a><p className="previous-page">I regret this take me back</p></a></Link>
     
@@ -66,8 +53,7 @@ export default function FirstPost(props) {
                     </div></div>
             }
 
-    
-    
+  
     </div>
 </div>
     )
