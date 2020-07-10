@@ -3,6 +3,7 @@ import moment from 'moment'
 import LoadDay from '../components/LoadDay'
 import Hourly from '../components/hourly'
 import React, { useState } from 'react';
+import Link from 'next/link'
 
 
 
@@ -68,9 +69,9 @@ export default function Home(props) {
     </div>
     <div className="contact">
         <p>Dont like the weather?</p>
-        <span><p>Complain to the weather person!</p></span>
+        <Link href="/contact"><a>Complain to the weather person</a></Link>
     </div>
-
+    
 
   </div>
 )}
