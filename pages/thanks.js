@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
 
-export default function Thanks({allPostsData}) {
+
+export default function Thanks() {
   return (
   <div>
     <div className="hero-img"></div>
