@@ -215,6 +215,8 @@ form>input{
     font-size:1.5em;
     font-weight:700;
     margin-top:10px;
+    border: none;
+    border-radius: 4px;
 
 }
 
@@ -231,15 +233,17 @@ form>input{
 
 .home-btn {
     background-color: #ED61AB;
-    padding: 10.5px 21px;
-    border-radius: 8px;
+    padding: 5px 18px 18px;
+    border-radius: 4px;
     color: white;
     font-family:'Raleway', sans-serif;
     text-decoration: none;
     vertical-align: middle;
-    font-weight: bold;
+    font-weight: 700;
     width: 100px;
+    height:15px;
     text-align: center;
+    font-size:1.5em;
     
 }
 
