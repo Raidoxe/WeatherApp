@@ -6,15 +6,27 @@ import Layout from '../components/layout'
 import Weekdays from '../components/weekDays'
 
 export default function Home(props) {
+  const loadedIndex = 0;
 
 
   const [weather, setWeather] = useState(props.weather);
-    
+  const [currentLocation, setCurrentLocation] = useState('perth');
+
+  const getWeatherIndex = (arr) => {
+    for(let i = 0; i < arr.length; i++) {
+      if(arr[i] === currentLocation) {
+        loadedIndex = i;
+        return i;
+      }
+    }
+    throw new error;
+  }
+
   return (
 
 <div className="container">
 
-    <Layout  location={weather.location[1]} current={weather.current[1]} setWeather={setWeather}/>
+    <Layout  location={weather.location[1]} current={weather.current[1]} setWeather={setWeather.bind(this)}/>
 
     <Weekdays weather={weather} />
 

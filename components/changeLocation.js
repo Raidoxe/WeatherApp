@@ -1,7 +1,8 @@
 import gethourly from './getHourly'
 import getWeatherPerDay from './getWeatherPerDay'
 
-async function changeLocation(lat, lon, set) {
+async function changeLocation(lat, lon, set, locName) {
+    setUserSession(locName);
     const res = await fetch(`http://localhost:3000/api/weatherdata?lat=${lat}&lon=${lon}`);
     const data = await res.json();
     let weatherData = await getWeatherPerDay(data);
@@ -19,6 +20,29 @@ async function changeLocation(lat, lon, set) {
         hour: hourly
        
       })
+    }
+
+    async function setUserSession(locName) {
+      console.log(locName);
+      window.localStorage.setItem('activeLocation', locName);
+      console.log(window.localStorage.getItem('activeLocation'));
+      /*switch(locName) {
+        case 'london':
+          window.localStorage.setItem('activeLocation', 'london');
+          break;
+        case 'newyork':
+          window.localStorage.setItem('activeLocation', 'newyork');
+          break;
+        case 'perth':
+            window.localStorage.setItem('activeLocation', 'perth');
+            break;
+        case 'sydney':
+            window.localStorage.setItem('activeLocation', 'sydney');
+            break;
+          case 'california':
+            window.localStorage.setItem('activeLocation', 'california');
+            break;
+      }*/
     }
  
     export default changeLocation;
